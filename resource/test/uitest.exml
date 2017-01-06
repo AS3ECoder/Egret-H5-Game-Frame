@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="uitest" width="400" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:Pic id="TOUCH" width="20" height="20" x="332" y="235" source="test1_jpg"/>
+</e:Skin>
