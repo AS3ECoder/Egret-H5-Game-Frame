@@ -12,9 +12,7 @@ class Pic extends eui.Image
     public isHit = true;
     
     //是否为切换场景触发器
-    public isChangScene = false;
-    //场景触发器触发的皮肤组件类名
-    public skinClassName = "";
+    public isChangeScene = false;
 
     //碰撞检测，ob为检测的对象，isPrecise为是否使用精确检测碰撞（默认为false）
     public isCrash(ob:Pic):boolean{

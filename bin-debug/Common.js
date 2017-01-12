@@ -11,5 +11,7 @@ var Common = (function () {
 Common.width = 1136;
 //舞台高度
 Common.height = 640;
+//游戏版本
+Common.version = 1.0;
 __reflect(Common.prototype, "Common");
 //# sourceMappingURL=Common.js.map

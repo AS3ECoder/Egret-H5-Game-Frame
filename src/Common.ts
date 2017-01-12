@@ -4,4 +4,7 @@ class Common{
     public static width:number = 1136;
     //舞台高度
     public static height:number = 640;
+
+    //游戏版本
+    public static version:number = 1.0;
 }

@@ -131,6 +131,8 @@ class View extends eui.Component
         this.orderController(className, skinName, jsonName, groupName);    //发送事件
 
         this.removeEventListener(GameEvent.CHANGESCENE, this.control.receiveSkinClassName, this.control);
+
+        //this.removeUI();
     }
 
     //发送事件

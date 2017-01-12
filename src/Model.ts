@@ -60,7 +60,7 @@ class Model extends egret.Sprite{
     //预加载组名
     private groupName:string;
     
-    //回调函数
+    //资源加载完成后，RESCOMPLETE完成事件的接收对象
     private object:View;
 
 /*-------------------------------------------------------------------------------------------------------*/

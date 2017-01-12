@@ -126,6 +126,7 @@ var View = (function (_super) {
         this.addEventListener(GameEvent.CHANGESCENE, this.control.receiveSkinClassName, this.control);
         this.orderController(className, skinName, jsonName, groupName); //发送事件
         this.removeEventListener(GameEvent.CHANGESCENE, this.control.receiveSkinClassName, this.control);
+        //this.removeUI();
     };
     //发送事件
     View.prototype.orderController = function (className, skinName, jsonName, groupName) {

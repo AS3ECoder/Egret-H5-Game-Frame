@@ -17,9 +17,7 @@ var Pic = (function (_super) {
         //是否可碰撞,默认为可碰撞
         _this.isHit = true;
         //是否为切换场景触发器
-        _this.isChangScene = false;
-        //场景触发器触发的皮肤组件类名
-        _this.skinClassName = "";
+        _this.isChangeScene = false;
         return _this;
     }
     //碰撞检测，ob为检测的对象，isPrecise为是否使用精确检测碰撞（默认为false）
