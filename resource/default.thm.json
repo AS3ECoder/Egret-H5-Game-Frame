@@ -29,6 +29,7 @@
     "resource/eui_skins/ToggleSwitchSkin.exml",
     "resource/eui_skins/VScrollBarSkin.exml",
     "resource/eui_skins/VSliderSkin.exml",
+    "resource/test/Role.exml",
     "resource/test/test1.exml",
     "resource/test/test2.exml",
     "resource/test/uitest.exml"

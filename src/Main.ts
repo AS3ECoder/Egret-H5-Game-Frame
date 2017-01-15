@@ -37,9 +37,9 @@ class Main extends eui.UILayer {
     protected startCreateScene(): void {
 
         this.addChild( new Map("ViewTest","test/test1.exml","default.res.json","test") );
-    
-    }
+        
 
+    }
 
 
 

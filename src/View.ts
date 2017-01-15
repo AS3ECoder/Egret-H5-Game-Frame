@@ -117,10 +117,12 @@ class View extends eui.Component
 /* 切换场景事件 */
 
     public control:Controller;     //当Controller对象添加View时被赋值
+    public web:TcpWebSocket;       //通信对象，用于发送数据到服务器
 
     //来自控制器的连通事件
     public connectToController(evt:GameEvent){
         this.control = evt.target;
+        this.web = evt._webSocket;
     }
     
     //添加切换场景事件
@@ -144,6 +146,47 @@ class View extends eui.Component
         daterEvent._groupName = groupName;  //添加对应的事件信息，值为预加载组名
 
         this.dispatchEvent(daterEvent);     //发送要求事件
+    }
+
+
+/*--------------------------------------------------------------------------------------*/
+
+    //webSocket网络通信，接收服务器数据函数
+    public receiveServerMsg(evt:GameEvent):void{
+        var server_data:string = evt._serverData;   //接收服务器数据
+
+        this.saveServerData(server_data);  //调用处理函数
+    }
+
+    //服务器数据队列
+    public serverData:string[] = new Array();
+
+    //接收并处理函数，如果使用webSocket网络通信的话，子类必须继承使用
+    protected saveServerData(server_data:string):void{
+        //console.log("View视图接收到服务器数据："+server_data);
+
+        this.serverData.push(server_data);
+    }
+
+    //检查是否收到服务器数据
+    protected hasServerData():boolean{
+        if(this.serverData.length > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    //获取队列中的一个数据
+    protected receive():string{
+        return this.serverData.shift();
+    }
+
+    //发送数据到服务器
+    protected send(server_data:string):void{
+        //调用网络通信对象发送函数
+        this.web.send( server_data );   
     }
 
 

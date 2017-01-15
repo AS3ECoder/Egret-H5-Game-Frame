@@ -23,6 +23,8 @@ var View = (function (_super) {
         _this.distanceUI = new egret.Point();
         //当前触摸状态，按下时，值为true
         _this.touchStatusUI = false;
+        //服务器数据队列
+        _this.serverData = new Array();
         /*----------------------------------------------------------------------------------------------*/
         /* 构造 */
         _this.skinTempName = ""; //临时的皮肤路径
@@ -117,6 +119,7 @@ var View = (function (_super) {
     //来自控制器的连通事件
     View.prototype.connectToController = function (evt) {
         this.control = evt.target;
+        this.web = evt._webSocket;
     };
     //添加切换场景事件
     View.prototype.addChangeSceneEvent = function (className, skinName, jsonName, groupName) {
@@ -136,6 +139,35 @@ var View = (function (_super) {
         daterEvent._jsonName = jsonName; //添加对应的事件信息，值为资源配置文件
         daterEvent._groupName = groupName; //添加对应的事件信息，值为预加载组名
         this.dispatchEvent(daterEvent); //发送要求事件
+    };
+    /*--------------------------------------------------------------------------------------*/
+    //webSocket网络通信，接收服务器数据函数
+    View.prototype.receiveServerMsg = function (evt) {
+        var server_data = evt._serverData; //接收服务器数据
+        this.saveServerData(server_data); //调用处理函数
+    };
+    //接收并处理函数，如果使用webSocket网络通信的话，子类必须继承使用
+    View.prototype.saveServerData = function (server_data) {
+        //console.log("View视图接收到服务器数据："+server_data);
+        this.serverData.push(server_data);
+    };
+    //检查是否收到服务器数据
+    View.prototype.hasServerData = function () {
+        if (this.serverData.length > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    //获取队列中的一个数据
+    View.prototype.receive = function () {
+        return this.serverData.shift();
+    };
+    //发送数据到服务器
+    View.prototype.send = function (server_data) {
+        //调用网络通信对象发送函数
+        this.web.send(server_data);
     };
     //父类函数
     View.prototype.createChildren = function () {

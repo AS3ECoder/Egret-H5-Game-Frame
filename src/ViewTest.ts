@@ -4,16 +4,27 @@ class ViewTest extends View{
     //继承游戏主逻辑
     protected createScene():void{
         super.createScene();
+
+        //this.role.toPlay("role");
         this.addMasterEvent();
-        //this.addUIMoveEvent(this.one);
+        this.addUIMoveEvent(this.two);
     }
 
     protected masterEventHandle(){
+
         this.everyMasterHaveToExec();
+        this.send("aaa");
         this.game();
     }
 
     private game():void{
+
+        if(this.hasServerData() === true){
+            if(this.receive() == "aaa"){
+                //tween动画
+                this.role.toPlay("role");
+            }
+        }
         
         this.one.x += 0.03*this.time;
         this.two.x -= 0.04*this.time;
@@ -30,7 +41,9 @@ class ViewTest extends View{
         }
     }
 
+    //对应ID
     public one:Pic;
     public two:Pic;
+    public role:TweenAnimation;
 
 }

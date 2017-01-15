@@ -13,6 +13,8 @@ class GameEvent extends egret.Event
 
     public static CONNECT:string = "连通类间通信";
 
+    public static RECEIVESERVER:string = "接收服务器数据";
+
 
     public _todo:string = "";   //事件信息
 
@@ -20,6 +22,9 @@ class GameEvent extends egret.Event
     public _skinName:string = "";   //CHANGESCENE事件的eui皮肤EXML路径
     public _jsonName:string = "";   //CHANGESCENE事件的RES的资源json配置文件
     public _groupName:string = "";  //CHANGESCENE事件的预加载组名
+
+    public _webSocket:TcpWebSocket = null;  //TcpWebSocket类指针
+    public _serverData:string = "";     //接收服务器数据
 
     public constructor(type:string, bubbles:boolean=false, cancelable:boolean=false)
     {

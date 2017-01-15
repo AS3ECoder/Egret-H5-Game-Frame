@@ -39,6 +39,7 @@ var Controller = (function (_super) {
     //添加向下通知保证路线连通事件
     Controller.prototype.connectToView = function (evt) {
         this.map = evt.target;
+        this.web = evt._webSocket;
         this.addEventListener(GameEvent.CONNECT, this.view.connectToController, this.view); //注册侦听器
         this.orderConnect(); //发送要求
         this.removeEventListener(GameEvent.CONNECT, this.view.connectToController, this.view); //移除侦听器
@@ -47,6 +48,7 @@ var Controller = (function (_super) {
     Controller.prototype.orderConnect = function () {
         var daterEvent = new GameEvent(GameEvent.CONNECT); //生成事件对象
         daterEvent._todo = "请求连通"; //添加对应的事件信息
+        daterEvent._webSocket = this.web; //添加网络对象指针
         this.dispatchEvent(daterEvent); //发送要求事件
     };
     //接收View发送的切换场景事件
@@ -63,6 +65,20 @@ var Controller = (function (_super) {
         daterEvent._skinName = skinName; //添加对应的事件信息，值为皮肤路径
         daterEvent._jsonName = jsonName; //添加对应的事件信息，值为资源配置文件
         daterEvent._groupName = groupName; //添加对应的事件信息，值为预加载组名
+        this.dispatchEvent(daterEvent); //发送要求事件
+    };
+    /*--------------------------------------------------------------------------------------*/
+    //webSocket网络通信，接收服务器数据函数
+    Controller.prototype.receiveServerMsg = function (evt) {
+        this.addEventListener(GameEvent.RECEIVESERVER, this.view.receiveServerMsg, this.view); //注册侦听器
+        var msg = evt._serverData;
+        this.orderSocketEvent(msg); //发送要求
+        this.removeEventListener(GameEvent.RECEIVESERVER, this.view.receiveServerMsg, this.view); //移除侦听器
+    };
+    //发送事件
+    Controller.prototype.orderSocketEvent = function (msg) {
+        var daterEvent = new GameEvent(GameEvent.RECEIVESERVER); //生成事件对象
+        daterEvent._serverData = msg; //添加服务器数据
         this.dispatchEvent(daterEvent); //发送要求事件
     };
     return Controller;

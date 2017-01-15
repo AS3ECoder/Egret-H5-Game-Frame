@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="test" width="400" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<ns1:Pic id="one" width="50" height="34.45" x="-92.5" y="13.19" source="test1_jpg" anchorOffsetX="-142.5" anchorOffsetY="-106.81"/>
-	<ns1:Pic id="two" width="33" height="22.94" x="304.25" y="122.09" source="test2_jpg" anchorOffsetX="8.25" anchorOffsetY="-0.81"/>
+	<ns1:Pic id="two" width="33" height="22.94" x="280.25" y="127.09" source="test2_jpg" anchorOffsetX="8.25" anchorOffsetY="-0.81"/>
+	<ns1:TweenAnimation id="role" width="20" height="20" x="121" y="-27" skinName="Role"/>
 </e:Skin>

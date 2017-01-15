@@ -16,6 +16,8 @@ var Map = (function (_super) {
         var _this = _super.call(this) || this;
         //控制器对象
         _this.game = null;
+        //网络通信对象
+        _this.web = null;
         /*--------------------------------------------------------------------------------------*/
         /* 切换场景事件 */
         //皮肤类名
@@ -32,6 +34,7 @@ var Map = (function (_super) {
         _this.skinName = skinName;
         _this.jsonName = jsonName;
         _this.groupName = groupName;
+        _this.web = new TcpWebSocket(Common.server, Common.port, _this);
         _this.changeScene();
         return _this;
     }
@@ -46,6 +49,7 @@ var Map = (function (_super) {
         this.addChild(this.game);
         this.addConnectToCotroller();
     };
+    /*--------------------------------------------------------------------------------------*/
     //添加向下通知保证路线连通事件
     Map.prototype.addConnectToCotroller = function () {
         this.addEventListener(GameEvent.CONNECT, this.game.connectToView, this.game); //注册侦听器
@@ -56,6 +60,7 @@ var Map = (function (_super) {
     Map.prototype.orderConnect = function () {
         var daterEvent = new GameEvent(GameEvent.CONNECT); //生成事件对象
         daterEvent._todo = "请求连通"; //添加对应的事件信息
+        daterEvent._webSocket = this.web; //添加网络对象指针
         this.dispatchEvent(daterEvent); //发送要求事件
     };
     //接收Controller发送的切换场景事件
@@ -66,6 +71,20 @@ var Map = (function (_super) {
         this.jsonName = evt._jsonName; //接收到配置文件名
         this.groupName = evt._groupName; //接收到预加载组名
         this.changeScene();
+    };
+    /*--------------------------------------------------------------------------------------*/
+    //webSocket网络通信，接收服务器数据函数
+    Map.prototype.receiveServerMsg = function (msg) {
+        if (msg === void 0) { msg = ""; }
+        this.addEventListener(GameEvent.RECEIVESERVER, this.game.receiveServerMsg, this.game); //注册侦听器
+        this.orderSocketEvent(msg); //发送要求
+        this.removeEventListener(GameEvent.RECEIVESERVER, this.game.receiveServerMsg, this.game); //移除侦听器
+    };
+    //发送事件
+    Map.prototype.orderSocketEvent = function (msg) {
+        var daterEvent = new GameEvent(GameEvent.RECEIVESERVER); //生成事件对象
+        daterEvent._serverData = msg; //添加服务器数据
+        this.dispatchEvent(daterEvent); //发送要求事件
     };
     return Map;
 }(egret.Sprite));

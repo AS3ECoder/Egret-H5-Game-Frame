@@ -3,6 +3,8 @@ class Map extends egret.Sprite{
 
     //控制器对象
     private game:Controller = null;
+    //网络通信对象
+    public web:TcpWebSocket = null;
 
     //地图构造类，跟控制器的一样，用来初始化第一张地图
     public constructor(
@@ -19,6 +21,8 @@ class Map extends egret.Sprite{
             this.skinName = skinName;    
             this.jsonName = jsonName;     
             this.groupName = groupName; 
+
+            this.web = new TcpWebSocket(Common.server, Common.port, this);
 
             this.changeScene();
     }
@@ -45,6 +49,9 @@ class Map extends egret.Sprite{
     }
 
 
+/*--------------------------------------------------------------------------------------*/
+
+
     //添加向下通知保证路线连通事件
     private addConnectToCotroller(){
         this.addEventListener(GameEvent.CONNECT, this.game.connectToView, this.game);     //注册侦听器
@@ -57,6 +64,7 @@ class Map extends egret.Sprite{
     private orderConnect(){
         var daterEvent:GameEvent = new GameEvent(GameEvent.CONNECT);    //生成事件对象
         daterEvent._todo = "请求连通";    //添加对应的事件信息
+        daterEvent._webSocket = this.web;   //添加网络对象指针
 
         this.dispatchEvent(daterEvent);     //发送要求事件
     }
@@ -85,6 +93,28 @@ class Map extends egret.Sprite{
 
         this.changeScene();
     }
+
+
+
+/*--------------------------------------------------------------------------------------*/
+
+    //webSocket网络通信，接收服务器数据函数
+    public receiveServerMsg(msg:string=""):void{
+        this.addEventListener(GameEvent.RECEIVESERVER, this.game.receiveServerMsg, this.game);     //注册侦听器
+        this.orderSocketEvent(msg);   //发送要求
+        
+        this.removeEventListener(GameEvent.RECEIVESERVER, this.game.receiveServerMsg, this.game);  //移除侦听器
+    }
+
+    //发送事件
+    private orderSocketEvent(msg:string){
+        var daterEvent:GameEvent = new GameEvent(GameEvent.RECEIVESERVER);    //生成事件对象
+        
+        daterEvent._serverData = msg;   //添加服务器数据
+
+        this.dispatchEvent(daterEvent);     //发送要求事件
+    }
+
 
 
 }

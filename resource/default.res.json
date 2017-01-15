@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,test1_jpg,test2_jpg",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,test1_jpg,test2_jpg,rightLeg_png,body_png,head_png,leftHand_png,leftLeg_png,rightHand_png",
 			"name": "preload"
 		},
 		{
@@ -149,6 +149,36 @@
 			"url": "test/test2.jpg",
 			"type": "image",
 			"name": "test2_jpg"
+		},
+		{
+			"name": "rightLeg_png",
+			"type": "image",
+			"url": "test/rightLeg.png"
+		},
+		{
+			"name": "body_png",
+			"type": "image",
+			"url": "test/body.png"
+		},
+		{
+			"name": "head_png",
+			"type": "image",
+			"url": "test/head.png"
+		},
+		{
+			"name": "leftHand_png",
+			"type": "image",
+			"url": "test/leftHand.png"
+		},
+		{
+			"name": "leftLeg_png",
+			"type": "image",
+			"url": "test/leftLeg.png"
+		},
+		{
+			"name": "rightHand_png",
+			"type": "image",
+			"url": "test/rightHand.png"
 		}
 	]
 }

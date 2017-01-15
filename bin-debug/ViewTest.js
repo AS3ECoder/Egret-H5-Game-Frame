@@ -15,14 +15,22 @@ var ViewTest = (function (_super) {
     //继承游戏主逻辑
     ViewTest.prototype.createScene = function () {
         _super.prototype.createScene.call(this);
+        //this.role.toPlay("role");
         this.addMasterEvent();
-        //this.addUIMoveEvent(this.one);
+        this.addUIMoveEvent(this.two);
     };
     ViewTest.prototype.masterEventHandle = function () {
         this.everyMasterHaveToExec();
+        this.send("aaa");
         this.game();
     };
     ViewTest.prototype.game = function () {
+        if (this.hasServerData() === true) {
+            if (this.receive() == "aaa") {
+                //tween动画
+                this.role.toPlay("role");
+            }
+        }
         this.one.x += 0.03 * this.time;
         this.two.x -= 0.04 * this.time;
         if (this.one.isCrash(this.two) == true) {
