@@ -150,16 +150,17 @@ class View extends eui.Component
 
 
 /*--------------------------------------------------------------------------------------*/
+//webSocket网络通信
 
-    //webSocket网络通信，接收服务器数据函数
+    //服务器数据队列
+    public serverData:string[] = new Array();
+
+    //接收服务器数据函数
     public receiveServerMsg(evt:GameEvent):void{
         var server_data:string = evt._serverData;   //接收服务器数据
 
         this.saveServerData(server_data);  //调用处理函数
     }
-
-    //服务器数据队列
-    public serverData:string[] = new Array();
 
     //接收并处理函数，如果使用webSocket网络通信的话，子类必须继承使用
     protected saveServerData(server_data:string):void{
@@ -188,6 +189,17 @@ class View extends eui.Component
         //调用网络通信对象发送函数
         this.web.send( server_data );   
     }
+
+    //处理网络连接关闭
+    protected onSocketClose():void{
+        console.log("正在处理：网络连接关闭事件！");
+    }
+
+    //处理网络连接异常
+    protected onSocketError():void{
+        console.log("正在处理：网络连接异常事件！");
+    }
+
 
 
 /*----------------------------------------------------------------------------------------------*/

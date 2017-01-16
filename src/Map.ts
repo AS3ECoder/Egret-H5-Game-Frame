@@ -22,8 +22,10 @@ class Map extends egret.Sprite{
             this.jsonName = jsonName;     
             this.groupName = groupName; 
 
+            //实例化webSocket网络连接对象
             this.web = new TcpWebSocket(Common.server, Common.port, this);
 
+            //初始化游戏界面
             this.changeScene();
     }
 
@@ -97,8 +99,9 @@ class Map extends egret.Sprite{
 
 
 /*--------------------------------------------------------------------------------------*/
+//webSocket网络通信
 
-    //webSocket网络通信，接收服务器数据函数
+    //接收服务器数据函数
     public receiveServerMsg(msg:string=""):void{
         this.addEventListener(GameEvent.RECEIVESERVER, this.game.receiveServerMsg, this.game);     //注册侦听器
         this.orderSocketEvent(msg);   //发送要求
@@ -106,7 +109,7 @@ class Map extends egret.Sprite{
         this.removeEventListener(GameEvent.RECEIVESERVER, this.game.receiveServerMsg, this.game);  //移除侦听器
     }
 
-    //发送事件
+    //接收事件发送
     private orderSocketEvent(msg:string){
         var daterEvent:GameEvent = new GameEvent(GameEvent.RECEIVESERVER);    //生成事件对象
         
@@ -115,6 +118,32 @@ class Map extends egret.Sprite{
         this.dispatchEvent(daterEvent);     //发送要求事件
     }
 
+    //连接关闭事件
+    public onSocketClose():void{
+        this.addEventListener(GameEvent.CLOSESERVER, this.game.onSocketClose, this.game);     //注册侦听器
+        this.orderSocket("CLOSESERVER");   //发送要求
+        
+        this.removeEventListener(GameEvent.CLOSESERVER, this.game.onSocketClose, this.game);
+    }
 
+    //发送函数
+    private orderSocket(eventType:string):void{
+        var daterEvent:GameEvent;
+        switch(eventType){
+            case "CLOSESERVER" : daterEvent = new GameEvent(GameEvent.CLOSESERVER);
+                break;
+            case "ERRORSERVER" : daterEvent = new GameEvent(GameEvent.ERRORSERVER);
+                break;
+        }
+        this.dispatchEvent(daterEvent);     //发送要求事件
+    }
+
+    //出现异常事件
+    public onSocketError():void{
+        this.addEventListener(GameEvent.ERRORSERVER, this.game.onSocketError, this.game);     //注册侦听器
+        this.orderSocket("ERRORSERVER");   //发送要求
+        
+        this.removeEventListener(GameEvent.ERRORSERVER, this.game.onSocketError, this.game);
+    }
 
 }

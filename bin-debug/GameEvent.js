@@ -15,11 +15,14 @@ var GameEvent = (function (_super) {
         if (bubbles === void 0) { bubbles = false; }
         if (cancelable === void 0) { cancelable = false; }
         var _this = _super.call(this, type, bubbles, cancelable) || this;
+        //_todo变量所有事件类型都可使用
         _this._todo = ""; //事件信息
+        //CHANGESCENE事件携带的变量
         _this._className = ""; //CHANGESCENE事件的eui皮肤ts类名
         _this._skinName = ""; //CHANGESCENE事件的eui皮肤EXML路径
         _this._jsonName = ""; //CHANGESCENE事件的RES的资源json配置文件
         _this._groupName = ""; //CHANGESCENE事件的预加载组名
+        //RECEIVESERVER事件携带的变量
         _this._webSocket = null; //TcpWebSocket类指针
         _this._serverData = ""; //接收服务器数据
         return _this;
@@ -32,5 +35,7 @@ GameEvent.UIEVENT = "UI触发事件";
 GameEvent.CHANGESCENE = "切换场景";
 GameEvent.CONNECT = "连通类间通信";
 GameEvent.RECEIVESERVER = "接收服务器数据";
+GameEvent.CLOSESERVER = "网络连接关闭";
+GameEvent.ERRORSERVER = "网络连接异常";
 __reflect(GameEvent.prototype, "GameEvent");
 //# sourceMappingURL=GameEvent.js.map

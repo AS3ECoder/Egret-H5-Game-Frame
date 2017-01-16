@@ -23,6 +23,8 @@ var View = (function (_super) {
         _this.distanceUI = new egret.Point();
         //当前触摸状态，按下时，值为true
         _this.touchStatusUI = false;
+        /*--------------------------------------------------------------------------------------*/
+        //webSocket网络通信
         //服务器数据队列
         _this.serverData = new Array();
         /*----------------------------------------------------------------------------------------------*/
@@ -140,8 +142,7 @@ var View = (function (_super) {
         daterEvent._groupName = groupName; //添加对应的事件信息，值为预加载组名
         this.dispatchEvent(daterEvent); //发送要求事件
     };
-    /*--------------------------------------------------------------------------------------*/
-    //webSocket网络通信，接收服务器数据函数
+    //接收服务器数据函数
     View.prototype.receiveServerMsg = function (evt) {
         var server_data = evt._serverData; //接收服务器数据
         this.saveServerData(server_data); //调用处理函数
@@ -168,6 +169,14 @@ var View = (function (_super) {
     View.prototype.send = function (server_data) {
         //调用网络通信对象发送函数
         this.web.send(server_data);
+    };
+    //处理网络连接关闭
+    View.prototype.onSocketClose = function () {
+        console.log("正在处理：网络连接关闭事件！");
+    };
+    //处理网络连接异常
+    View.prototype.onSocketError = function () {
+        console.log("正在处理：网络连接异常事件！");
     };
     //父类函数
     View.prototype.createChildren = function () {

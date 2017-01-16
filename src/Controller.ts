@@ -109,6 +109,34 @@ class Controller extends egret.Sprite
 
         this.dispatchEvent(daterEvent);     //发送要求事件
     }
+
+    //连接关闭事件
+    public onSocketClose():void{
+        this.addEventListener(GameEvent.CLOSESERVER, this.view.onSocketClose, this.view);     //注册侦听器
+        this.orderSocket("CLOSESERVER");   //发送要求
+        
+        this.removeEventListener(GameEvent.CLOSESERVER, this.view.onSocketClose, this.view);
+    }
+
+    //发送函数
+    private orderSocket(eventType:string):void{
+        var daterEvent:GameEvent;
+        switch(eventType){
+            case "CLOSESERVER" : daterEvent = new GameEvent(GameEvent.CLOSESERVER);
+                break;
+            case "ERRORSERVER" : daterEvent = new GameEvent(GameEvent.ERRORSERVER);
+                break;
+        }
+        this.dispatchEvent(daterEvent);     //发送要求事件
+    }
+
+    //出现异常事件
+    public onSocketError():void{
+        this.addEventListener(GameEvent.ERRORSERVER, this.view.onSocketError, this.view);     //注册侦听器
+        this.orderSocket("ERRORSERVER");   //发送要求
+        
+        this.removeEventListener(GameEvent.ERRORSERVER, this.view.onSocketError, this.view);
+    }
     
 
 }

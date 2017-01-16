@@ -26,9 +26,11 @@ var ViewTest = (function (_super) {
     };
     ViewTest.prototype.game = function () {
         if (this.hasServerData() === true) {
-            if (this.receive() == "aaa") {
-                //tween动画
-                this.role.toPlay("role");
+            for (var i = this.serverData.length - 1; i >= 0; i--) {
+                if (this.receive() == "aaa") {
+                    //tween动画
+                    this.role.toPlay("role");
+                }
             }
         }
         this.one.x += 0.03 * this.time;

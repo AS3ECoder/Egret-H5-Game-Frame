@@ -5,24 +5,27 @@ class ViewTest extends View{
     protected createScene():void{
         super.createScene();
 
-        //this.role.toPlay("role");
-        this.addMasterEvent();
-        this.addUIMoveEvent(this.two);
+        //添加游戏逻辑事件
+        this.addMasterEvent();  //添加主逻辑
+        this.addUIMoveEvent(this.two);  //向对象添加拖拉事件
     }
 
+    //主逻辑处理函数
     protected masterEventHandle(){
+        this.everyMasterHaveToExec();   //主逻辑必调用函数
 
-        this.everyMasterHaveToExec();
-        this.send("aaa");
-        this.game();
+        this.send("aaa");   //发送数据到服务器
+        this.game();        //运行游戏
     }
 
     private game():void{
 
         if(this.hasServerData() === true){
-            if(this.receive() == "aaa"){
-                //tween动画
-                this.role.toPlay("role");
+            for(let i=this.serverData.length-1; i>=0; i--){
+                if(this.receive() == "aaa"){
+                    //tween动画
+                    this.role.toPlay("role");
+                }
             }
         }
         

@@ -81,6 +81,31 @@ var Controller = (function (_super) {
         daterEvent._serverData = msg; //添加服务器数据
         this.dispatchEvent(daterEvent); //发送要求事件
     };
+    //连接关闭事件
+    Controller.prototype.onSocketClose = function () {
+        this.addEventListener(GameEvent.CLOSESERVER, this.view.onSocketClose, this.view); //注册侦听器
+        this.orderSocket("CLOSESERVER"); //发送要求
+        this.removeEventListener(GameEvent.CLOSESERVER, this.view.onSocketClose, this.view);
+    };
+    //发送函数
+    Controller.prototype.orderSocket = function (eventType) {
+        var daterEvent;
+        switch (eventType) {
+            case "CLOSESERVER":
+                daterEvent = new GameEvent(GameEvent.CLOSESERVER);
+                break;
+            case "ERRORSERVER":
+                daterEvent = new GameEvent(GameEvent.ERRORSERVER);
+                break;
+        }
+        this.dispatchEvent(daterEvent); //发送要求事件
+    };
+    //出现异常事件
+    Controller.prototype.onSocketError = function () {
+        this.addEventListener(GameEvent.ERRORSERVER, this.view.onSocketError, this.view); //注册侦听器
+        this.orderSocket("ERRORSERVER"); //发送要求
+        this.removeEventListener(GameEvent.ERRORSERVER, this.view.onSocketError, this.view);
+    };
     return Controller;
 }(egret.Sprite));
 __reflect(Controller.prototype, "Controller");
