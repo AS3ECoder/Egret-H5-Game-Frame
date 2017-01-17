@@ -1,6 +1,4 @@
-// 网络通信
-//根据API的多个事件进行重新封装
-//重写HTTP类
+//webSocket协议的网络连接类
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };

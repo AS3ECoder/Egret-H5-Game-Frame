@@ -1,7 +1,5 @@
 // 视图，封装帧事件到eui组件作为主逻辑
 
-//视图类未完成，解决首次加载时主逻辑问题
-
 class View extends eui.Component
 {
 

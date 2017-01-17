@@ -15,14 +15,15 @@ var ViewTest = (function (_super) {
     //继承游戏主逻辑
     ViewTest.prototype.createScene = function () {
         _super.prototype.createScene.call(this);
-        //this.role.toPlay("role");
-        this.addMasterEvent();
-        this.addUIMoveEvent(this.two);
+        //添加游戏逻辑事件
+        this.addMasterEvent(); //添加主逻辑
+        this.addUIMoveEvent(this.two); //向对象添加拖拉事件
     };
+    //主逻辑处理函数
     ViewTest.prototype.masterEventHandle = function () {
-        this.everyMasterHaveToExec();
-        this.send("aaa");
-        this.game();
+        this.everyMasterHaveToExec(); //主逻辑必调用函数
+        this.send("aaa"); //发送数据到服务器
+        this.game(); //运行游戏
     };
     ViewTest.prototype.game = function () {
         if (this.hasServerData() === true) {

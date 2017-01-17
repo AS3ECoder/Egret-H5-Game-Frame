@@ -1,4 +1,5 @@
 //地图管理类
+
 class Map extends egret.Sprite{
 
     //控制器对象
@@ -7,11 +8,13 @@ class Map extends egret.Sprite{
     public web:TcpWebSocket = null;
 
     //地图构造类，跟控制器的一样，用来初始化第一张地图
+    //特别的，参数useWebSocket为是否使用网络功能，默认为true
     public constructor(
             className:string, 
             skinName:string, 
             jsonName:string = "default.res.json", 
-            groupName:string = "preload"
+            groupName:string = "preload",
+            useWebSocket:boolean = true
         ){
             super();
             this.width = Common.width;
@@ -22,8 +25,10 @@ class Map extends egret.Sprite{
             this.jsonName = jsonName;     
             this.groupName = groupName; 
 
-            //实例化webSocket网络连接对象
-            this.web = new TcpWebSocket(Common.server, Common.port, this);
+            //判断是否实例化webSocket网络连接对象
+            if(useWebSocket === true){
+                this.web = new TcpWebSocket(Common.server, Common.port, this);
+            }
 
             //初始化游戏界面
             this.changeScene();

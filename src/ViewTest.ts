@@ -1,4 +1,5 @@
-//视图类未完成，解决首次加载时主逻辑问题
+//测试
+
 class ViewTest extends View{
 
     //继承游戏主逻辑

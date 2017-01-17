@@ -10,9 +10,11 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Map = (function (_super) {
     __extends(Map, _super);
     //地图构造类，跟控制器的一样，用来初始化第一张地图
-    function Map(className, skinName, jsonName, groupName) {
+    //特别的，参数useWebSocket为是否使用网络功能，默认为true
+    function Map(className, skinName, jsonName, groupName, useWebSocket) {
         if (jsonName === void 0) { jsonName = "default.res.json"; }
         if (groupName === void 0) { groupName = "preload"; }
+        if (useWebSocket === void 0) { useWebSocket = true; }
         var _this = _super.call(this) || this;
         //控制器对象
         _this.game = null;
@@ -34,8 +36,10 @@ var Map = (function (_super) {
         _this.skinName = skinName;
         _this.jsonName = jsonName;
         _this.groupName = groupName;
-        //实例化webSocket网络连接对象
-        _this.web = new TcpWebSocket(Common.server, Common.port, _this);
+        //判断是否实例化webSocket网络连接对象
+        if (useWebSocket === true) {
+            _this.web = new TcpWebSocket(Common.server, Common.port, _this);
+        }
         //初始化游戏界面
         _this.changeScene();
         return _this;
