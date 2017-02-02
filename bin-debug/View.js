@@ -68,23 +68,19 @@ var View = (function (_super) {
         var end = egret.getTimer(); //每帧结束时间
         var start = this.timeOnEnterFrame; //每帧开始时间
         this.time = end - start; //每帧所用时间
-        console.log("每帧所用毫秒: ", (1000 / this.time).toFixed(5));
+        //console.log("每帧所用毫秒: ", (1000 / this.time).toFixed(5));
         this.timeOnEnterFrame = egret.getTimer();
     };
-    /*--------------------------------------------------------------------------------------*/
-    /* UI点击事件 */
     //添加UI点击事件
-    View.prototype.addClickEvent = function (handleFunc, obj) {
-        if (handleFunc === void 0) { handleFunc = this.clickEventHandle; }
-        if (obj === void 0) { obj = this; }
+    View.prototype.addClickEvent = function (ui) {
         console.log("视图点击事件");
-        this.addEventListener(egret.TouchEvent.TOUCH_TAP, handleFunc, obj);
+        this.clickUI = ui;
+        this.clickUI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickEventHandle, this);
     };
     //取消UI点击事件
-    View.prototype.removeClickEvent = function (handleFuc, obj) {
-        if (handleFuc === void 0) { handleFuc = this.clickEventHandle; }
-        if (obj === void 0) { obj = this; }
-        this.removeEventListener(egret.TouchEvent.TOUCH_TAP, handleFuc, obj);
+    View.prototype.removeClickEvent = function (ui) {
+        this.clickUI = ui;
+        this.clickUI.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickEventHandle, this);
     };
     //UI点击处理函数，获取点击点，子类可覆盖
     View.prototype.clickEventHandle = function (evt) {
@@ -116,6 +112,11 @@ var View = (function (_super) {
         console.log("Mouse Up.");
         this.touchStatusUI == false;
         this.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.UIMouseMove, this);
+    };
+    View.prototype.removeUIMoveEvent = function (ui) {
+        if (ui === void 0) { ui = null; }
+        this.moveUI.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.UIMouseDown, this);
+        this.moveUI.removeEventListener(egret.TouchEvent.TOUCH_END, this.UIMouseUp, this);
     };
     //来自控制器的连通事件
     View.prototype.connectToController = function (evt) {

@@ -188,6 +188,14 @@ var GameData = (function () {
         var result = egret.localStorage.getItem("localScatterDataNotDB_" + key);
         return result;
     };
+    /**================================================================================= */
+    /**================================================================================= */
+    //生成任意值到任意值的随机整数
+    GameData.random = function (min, max) {
+        if (min === void 0) { min = 0; }
+        if (max === void 0) { max = 1; }
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
     return GameData;
 }());
 __reflect(GameData.prototype, "GameData");
