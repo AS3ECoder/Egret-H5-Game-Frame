@@ -186,11 +186,11 @@ Actlinkwe游戏框架中现有的视图类有两个，分别为：
 
         * `addMasterEvent(func,ob)` : 受保护有参函数，子类调用时可使用默认参数值无需赋值直接调用。此函数功能为对ob对象添加**帧事件**，然后调用ob对象中的函数func来处理帧事件。常用于显示对象对应于UI操作的移动。  
         
-        * `addClickEvent(ob)` : 受保护有参函数，子类调用时可使用默认参数值无需赋值直接调用。此函数功能为对ob对象添加**点击事件**，然后调用ob对象中的函数func来处理点击事件。用于玩家与游戏进行交互，使用频率较多。
+        * `addClickEvent(ob)` : 受保护有参函数，子类调用时可使用默认参数值无需赋值直接调用。此函数功能为对ob对象添加**点击事件**，然后调用clickEventHandle函数处理ob对象的点击事件（编程人员需重写）。用于玩家与游戏进行交互，因为只能监听一个显示对象，所以使用频率较少，建议编程人员自行写显示对象的点击事件。
 
         * `addUIMoveEvent(ob)` : 受保护有参函数，子类调用时可使用默认参数值无需赋值直接调用。此函数功能为对ob对象添加**拖动事件**，可将对象拖动到屏幕任意位置，此函数执行结束没有回调，请配合其他逻辑一齐使用。
 
-        * `addChangeSceneEvent(class,exml,json,group)` : 受保护有参函数，调用时传递四个参数用于切换场景，四个参数对应于`CHANGESCENE`的四个信息_className、_skinName、_jsonName、_groupName。当将形参的值传给事件并发送给控制器后，自动撤销此事件的监听。
+        * `addChangeSceneEvent(class,exml,json,group)` : 受保护有参函数，调用时传递四个参数用于切换场景，四个参数对应于`CHANGESCENE`的四个信息_className、_skinName、_jsonName、_groupName。当将形参的值传给事件并发送给控制器后，自动撤销此事件的监听。此事件使用频率较高。
 
     * 对应的事件撤销器
 

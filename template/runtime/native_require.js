@@ -11,20 +11,20 @@ var game_file_list = [
 	"libs/modules/socket/socket.js",
 	"libs/modules/dragonBones/dragonBones.js",
 	"bin-debug/View.js",
-	"bin-debug/Map.js",
+	"bin-debug/ViewTest.js",
 	"bin-debug/Controller.js",
 	"bin-debug/GameData.js",
 	"bin-debug/GameEvent.js",
 	"bin-debug/LoadingUI.js",
 	"bin-debug/Main.js",
-	"bin-debug/Common.js",
+	"bin-debug/Map.js",
 	"bin-debug/Model.js",
 	"bin-debug/Pic.js",
 	"bin-debug/TcpWebSocket.js",
 	"bin-debug/ThemeAdapter.js",
 	"bin-debug/TweenAnimation.js",
 	"bin-debug/AssetAdapter.js",
-	"bin-debug/ViewTest.js",
+	"bin-debug/Common.js",
 	//----auto game_file_list end----
 ];
 
