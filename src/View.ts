@@ -47,7 +47,7 @@ class View extends eui.Component
         var end = egret.getTimer();             //每帧结束时间
         var start = this.timeOnEnterFrame;      //每帧开始时间
         this.time = end - start;                //每帧所用时间
-        console.log("每帧所用毫秒: ", (1000 / this.time).toFixed(5));
+        //console.log("每帧所用毫秒: ", (1000 / this.time).toFixed(5));
         this.timeOnEnterFrame = egret.getTimer();
     }
     
@@ -55,14 +55,19 @@ class View extends eui.Component
 /*--------------------------------------------------------------------------------------*/
 /* UI点击事件 */
 
+    //点击事件UI
+    protected clickUI:any;
+
     //添加UI点击事件
-    protected addClickEvent(handleFunc:any=this.clickEventHandle, obj:View=this){
+    protected addClickEvent(ui:any){
         console.log("视图点击事件");
-        this.addEventListener(egret.TouchEvent.TOUCH_TAP, handleFunc, obj);
+        this.clickUI = ui;
+        this.clickUI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickEventHandle, this);
     }
     //取消UI点击事件
-    protected removeClickEvent(handleFuc:any=this.clickEventHandle, obj:View=this){
-        this.removeEventListener(egret.TouchEvent.TOUCH_TAP, handleFuc, obj);
+    protected removeClickEvent(ui:any){
+        this.clickUI = ui;
+        this.clickUI.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickEventHandle, this);
     }
     //UI点击处理函数，获取点击点，子类可覆盖
     protected clickEventHandle(evt:egret.TouchEvent){
@@ -78,7 +83,7 @@ class View extends eui.Component
     //鼠标点击时，鼠标全局坐标与显示对象的位置差
     protected distanceUI:egret.Point = new egret.Point();
     //当前触摸状态，按下时，值为true
-    private touchStatusUI:boolean = false;              
+    protected touchStatusUI:boolean = false;              
     //显示对象拖动事件，参数为皮肤中的显示对象
     protected addUIMoveEvent(ui:any){
         this.moveUI = ui;
@@ -108,6 +113,10 @@ class View extends eui.Component
         console.log("Mouse Up.");
         this.touchStatusUI == false;
         this.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.UIMouseMove, this);
+    }
+    protected removeUIMoveEvent(ui:any=null){
+        this.moveUI.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.UIMouseDown, this);
+        this.moveUI.removeEventListener(egret.TouchEvent.TOUCH_END, this.UIMouseUp, this);
     }
 
 
