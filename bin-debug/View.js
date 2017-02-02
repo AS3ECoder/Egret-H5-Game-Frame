@@ -7,7 +7,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-//视图类未完成，解决首次加载时主逻辑问题
 var View = (function (_super) {
     __extends(View, _super);
     //构造函数，参数skinTempName为resource文件夹下的EXML皮肤路径

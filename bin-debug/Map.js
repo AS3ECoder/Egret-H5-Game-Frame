@@ -1,3 +1,4 @@
+//地图管理类
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
@@ -6,7 +7,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-//地图管理类
 var Map = (function (_super) {
     __extends(Map, _super);
     //地图构造类，跟控制器的一样，用来初始化第一张地图

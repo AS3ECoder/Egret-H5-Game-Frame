@@ -1,3 +1,4 @@
+//测试
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
@@ -6,7 +7,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-//视图类未完成，解决首次加载时主逻辑问题
 var ViewTest = (function (_super) {
     __extends(ViewTest, _super);
     function ViewTest() {
